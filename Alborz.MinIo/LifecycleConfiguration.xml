@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LifecycleConfiguration>
+	<Rule>
+		<ID>my-rule</ID>
+		<Filter>
+			<Prefix>my-prefix</Prefix>
+		</Filter>
+		<Transitions>
+			<Transition>
+				<Days>30</Days>
+				<StorageClass>ARCHIVE</StorageClass>
+			</Transition>
+		</Transitions>
+		<Status>Enabled</Status>
+	</Rule>
+	
+</LifecycleConfiguration>
+
+

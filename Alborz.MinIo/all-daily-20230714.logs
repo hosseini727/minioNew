@@ -1,0 +1,80 @@
+2023-07-14 06:37:56.744 +03:30 [ERR] Could not find file 'D:\down\data\my.mp3'.
+2023-07-14 06:37:56.901 +03:30 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not find file 'D:\down\data\my.mp3'.
+File name: 'D:\down\data\my.mp3'
+   at System.IO.FileInfo.get_Length()
+   at Cleint.PutObjectArgs.Populate() in D:\Project_minIo_git\MinIo\MinIo\Cleint\DataModel\ObjectOperationsArgs.cs:line 1859
+   at Cleint.PutObjectArgs.Validate() in D:\Project_minIo_git\MinIo\MinIo\Cleint\DataModel\ObjectOperationsArgs.cs:line 1851
+   at Cleint.MinioClient.PutObjectAsync(PutObjectArgs args, CancellationToken cancellationToken) in D:\Project_minIo_git\MinIo\MinIo\Cleint\ApiEndpoints\ObjectOperations.cs:line 563
+   at Alborz.MinIo.Controllers.MinioController.PutObjectBucket(String bucketName) in D:\Project_minIo_git\MinIo\MinIo\Alborz.MinIo\Controllers\MinioController.cs:line 275
+   at lambda_method5(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-07-14 06:38:39.620 +03:30 [ERR] Could not find file 'D:\down\data\my.mp3'.
+2023-07-14 06:38:39.651 +03:30 [ERR] An unhandled exception has occurred while executing the request.
+System.IO.FileNotFoundException: Could not find file 'D:\down\data\my.mp3'.
+File name: 'D:\down\data\my.mp3'
+   at System.IO.FileInfo.get_Length()
+   at Cleint.PutObjectArgs.Populate() in D:\Project_minIo_git\MinIo\MinIo\Cleint\DataModel\ObjectOperationsArgs.cs:line 1859
+   at Cleint.PutObjectArgs.Validate() in D:\Project_minIo_git\MinIo\MinIo\Cleint\DataModel\ObjectOperationsArgs.cs:line 1851
+   at Cleint.MinioClient.PutObjectAsync(PutObjectArgs args, CancellationToken cancellationToken) in D:\Project_minIo_git\MinIo\MinIo\Cleint\ApiEndpoints\ObjectOperations.cs:line 563
+   at Alborz.MinIo.Controllers.MinioController.PutObjectBucket(String bucketName) in D:\Project_minIo_git\MinIo\MinIo\Alborz.MinIo\Controllers\MinioController.cs:line 275
+   at lambda_method5(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-07-14 06:39:08.513 +03:30 [ERR] The Access Key Id you provided does not exist in our records.
+2023-07-14 06:39:08.598 +03:30 [ERR] An unhandled exception has occurred while executing the request.
+Cleint.Exceptions.AuthorizationException: The Access Key Id you provided does not exist in our records.
+   at Cleint.MinioClient.ParseErrorFromContent(ResponseResult response) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 590
+   at Cleint.MinioClient.ParseError(ResponseResult response) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 471
+   at Cleint.MinioClient.<>c.<.ctor>b__95_0(ResponseResult response) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 41
+   at Cleint.MinioClient.HandleIfErrorResponse(ResponseResult response, IEnumerable`1 handlers, DateTime startTime) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 666
+   at Cleint.MinioClient.ExecuteTaskCoreAsync(IEnumerable`1 errorHandlers, HttpRequestMessageBuilder requestMessageBuilder, Boolean isSts, CancellationToken cancellationToken) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 445
+   at Cleint.BucketRegionCache.Update(MinioClient client, String bucketName) in D:\Project_minIo_git\MinIo\MinIo\Cleint\BucketRegionCache.cs:line 99
+   at Cleint.MinioClient.GetRegion(String bucketName) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 196
+   at Cleint.MinioClient.CreateRequest(HttpMethod method, String bucketName, String objectName, IDictionary`2 headerMap, String contentType, ReadOnlyMemory`1 body, String resourcePath, Boolean isBucketCreationRequest) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 285
+   at Cleint.MinioClient.CreateRequest[T](ObjectArgs`1 args) in D:\Project_minIo_git\MinIo\MinIo\Cleint\MinioClient.cs:line 244
+   at Cleint.MinioClient.NewMultipartUploadAsync(NewMultipartUploadPutArgs args, CancellationToken cancellationToken) in D:\Project_minIo_git\MinIo\MinIo\Cleint\ApiEndpoints\ObjectOperations.cs:line 1073
+   at Cleint.MinioClient.PutObjectAsync(PutObjectArgs args, CancellationToken cancellationToken) in D:\Project_minIo_git\MinIo\MinIo\Cleint\ApiEndpoints\ObjectOperations.cs:line 603
+   at Alborz.MinIo.Controllers.MinioController.PutObjectBucket(String bucketName) in D:\Project_minIo_git\MinIo\MinIo\Alborz.MinIo\Controllers\MinioController.cs:line 275
+   at lambda_method5(Closure , Object )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)

@@ -22,17 +22,21 @@ namespace Services.Services
         private readonly ILogger<RabbitMqServices> _logger;
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        public const string CurrentQueue = "CurrentQueue";
-        public const string logQueue = "logQueue";
+        public readonly string CurrentQueue = "CurrentQueue";
+        public readonly string logQueue = "logQueue";
 
 
         public RabbitMqServices()
         {
+            var hostNameRabbitmq = Environment.GetEnvironmentVariable("HOSTNAMERABBITMQ");
+            var portNameRabbitmq = Environment.GetEnvironmentVariable("PORTNAMERABBITMQ");
+
             var factory = new ConnectionFactory()
             {
-                HostName = "127.0.0.1",
-                //HostName = "host.docker.internal",
-                Port = 5672,
+                HostName = hostNameRabbitmq,
+                // HostName = "host.docker.internal",
+                //Port = 5672,
+                Port =int.Parse(portNameRabbitmq),
                 UserName = "guest",
                 Password = "guest"
             };

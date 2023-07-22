@@ -18,10 +18,11 @@ namespace Alborz.MinIo.Controllers
     {
 
         private readonly ILogger<MinioController> _logger;
-        private readonly MinioClient _MinioClient;      
+        private readonly MinioClient _MinioClient;
         public readonly string AccessKey = "EYDDQIQwwgSKCQVZqD8V";
         private readonly string SecretKey = "rfI3CkD49bFlfduzLlrujULg2eAFtfwUg2Kr5P1i";
-        private readonly string EndpointDocker = "host.docker.internal:9000";
+        //private readonly string EndpointDocker = "host.docker.internal:9000";
+        private readonly string EndpointDocker = Environment.GetEnvironmentVariable("ENDPOINTMINIO");
         private readonly string Endpoint = "127.0.0.1:9000";
 
         public MinioController(ILogger<MinioController> logger, MinioClient minioClient)
@@ -64,7 +65,7 @@ namespace Alborz.MinIo.Controllers
                 #region Initialization Minio
                 var location = "us-east-1";
                 //var endpoint = EndpointDocker;
-                var endpoint = Endpoint;
+                var endpoint = EndpointDocker;
                 //var port = "9000";
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
@@ -113,7 +114,7 @@ namespace Alborz.MinIo.Controllers
             try
             {
                 #region Add tag                 
-                var endpoint = Endpoint;
+                var endpoint = EndpointDocker;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -197,7 +198,7 @@ namespace Alborz.MinIo.Controllers
                 var filePath = objectName;
                 //var filePath = "C:/111.png";
                 var contentType = "application/octet-stream";
-                var endpoint = Endpoint;
+                var endpoint = EndpointDocker;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -344,7 +345,9 @@ namespace Alborz.MinIo.Controllers
         {
             try
             {
-                var endpoint = "127.0.0.1:9000";
+                //var endpoint = "127.0.0.1:9000";
+                var endpoint = EndpointDocker;
+                
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -356,7 +359,7 @@ namespace Alborz.MinIo.Controllers
 
                 var listBucket = await minio.ListBucketsAsync().ConfigureAwait(false);
 
-                return Ok();
+                return Ok(listBucket);
             }
             catch (Exception ex)
             {

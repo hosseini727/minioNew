@@ -39,8 +39,8 @@ builder.Host.UseSerilog((ctx, lc) => lc
 
 //var app = builder.Build();
 WebApplication? app = builder.Build();
-var test = app.Services.GetService<RabbitMqServices>();
-test.ConsumeMessages();
+var ServiceRabbitmq = app.Services.GetService<RabbitMqServices>();
+ServiceRabbitmq.ConsumeMessages();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();

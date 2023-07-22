@@ -16,30 +16,22 @@ using System.Net;
 
 namespace Services.Services
 {
-
-
-    public class MinioDtoRemoveTag
-    {
-        public string BucketName { get; set; }
-        public string ObjectName { get; set; }
-    }
-    public class RabbitMqServices //: IDisposable //: IRabbitMqServices
+   
+    public class RabbitMqServices 
     {
         private readonly ILogger<RabbitMqServices> _logger;
-
         private readonly IConnection _connection;
         private readonly IModel _channel;
-        public const string queueName = "ef";
-        
+        public const string CurrentQueue = "CurrentQueue";
+        public const string logQueue = "logQueue";
+
+
         public RabbitMqServices()
         {
-            //var factory = new ConnectionFactory() { HostName = "127.0.0.1" };
-            string environment = Environment.GetEnvironmentVariable("PATH");
-
             var factory = new ConnectionFactory()
             {
-                HostName = "host.docker.internal",
-                //HostName = environment,
+                HostName = "127.0.0.1",
+                //HostName = "host.docker.internal",
                 Port = 5672,
                 UserName = "guest",
                 Password = "guest"
@@ -47,22 +39,12 @@ namespace Services.Services
 
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "ef",
+            _channel.QueueDeclare(queue: "CurrentQueue",
                                   durable: true,
                                   exclusive: false,
                                   autoDelete: false,
                                   arguments: null);
         }
-
-        //private readonly MinioClient _MinioClient;
-
-
-        //public RabbitMqServices(MinioClient minioClient)
-        //{
-        //    _MinioClient = minioClient;
-        //}
-
-
        
         public void ConsumeMessages()
         {
@@ -81,131 +63,23 @@ namespace Services.Services
                             try
                             {
                                 message = System.Text.Encoding.UTF8.GetString(body);
-                                //response = message;
-
                                 bool removeTagObject = RemoveTagObject(message);
-
-                                var responseBytes = System.Text.Encoding.UTF8.GetBytes(message);
-                                _channel.BasicPublish
-                                    (exchange: string.Empty,
-                                     routingKey: _channel.QueueDeclare(queue: string.Empty).QueueName,
-                                    //routingKey: properties.ReplyTo,
-                                    basicProperties: replyProperties,
-                                    body: responseBytes);
+                                var responseBytes = System.Text.Encoding.UTF8.GetBytes(message);                              
                                 _channel.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
-
-                                _channel.QueueDeclare(queue: "ef", durable: true, exclusive: false, autoDelete: false, arguments: null);
-                               
+                                _channel.QueueDeclare(queue: CurrentQueue, durable: true, exclusive: false, autoDelete: false, arguments: null);                               
                             }
-                            catch (System.Exception ex)
+                            catch (Exception ex)
                             {
-                                _channel.BasicPublish(exchange: "", routingKey: "q1", basicProperties: properties, body: body);
+                                _channel.BasicPublish(exchange: "", routingKey: logQueue, basicProperties: properties, body: body);
                                 _channel.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
-                                _logger.LogWarning(ex.Message == null ? "problem" : ex.Message);
-                                //SendEmail(ex.Message.ToString());
-
                             }                           
             };
 
-            _channel.BasicConsume(queue: queueName,
+            _channel.BasicConsume(queue: CurrentQueue,
                                   autoAck: false,
                                   arguments: null,
                                   consumer: consumer);
         }
-
-        //public void SendEmail(string exceptionMessage)
-        //{
-        //    // Send email to the admin
-        //    var smtpClient = new SmtpClient("smtp.gmail.com", 587)
-        //    {
-        //        UseDefaultCredentials = false,
-        //        Credentials = new NetworkCredential("your_email@gmail.com", "your_password"),
-        //        EnableSsl = true
-        //    };
-
-        //    var mailMessage = new MailMessage
-        //    {
-        //        From = new MailAddress("esmaeil.hosseini727@gmail.com"),
-        //        Subject = "RabbitMQ Exception",
-        //        Body = exceptionMessage
-        //    };
-
-        //    mailMessage.To.Add("esmaeil.hosseini727@gmail.com");
-
-        //    // Send the email
-        //    smtpClient.Send(mailMessage);
-        //}
-
-        //public void Consume()
-        //{
-        //    int i = 0;
-        //    long messageIndex = 0;
-        //    var factory = new RabbitMQ.Client.ConnectionFactory() { HostName = "127.0.0.1" };
-
-        //    using (var connection = factory.CreateConnection())
-        //    {
-        //        using (var channel = connection.CreateModel())
-        //        {
-
-        //            channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-        //            channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-        //            var consumer = new RabbitMQ.Client.Events.EventingBasicConsumer(model: channel);
-
-        //            // using RabbitMQ.Client;
-        //            channel.BasicConsume
-        //                (queue: queueName,
-        //                autoAck: false,
-        //                arguments: null,
-        //                consumer: consumer);
-
-        //            consumer.Received += async (model, eventArgs) =>
-        //            {
-        //                var properties = eventArgs.BasicProperties;
-        //                var replyProperties =
-        //                    channel.CreateBasicProperties();
-
-        //                replyProperties.CorrelationId = properties.CorrelationId;
-        //                string response = "";
-        //                string message = "";
-        //                var body = eventArgs.Body.ToArray();
-        //                try
-        //                {
-        //                    message = System.Text.Encoding.UTF8.GetString(body);
-        //                    response = message;
-        //                }
-        //                catch (System.Exception ex)
-        //                {
-        //                    response = 0.ToString();
-        //                }
-        //                finally
-        //                {
-        //                    var responseBytes = System.Text.Encoding.UTF8.GetBytes(response);
-        //                    channel.BasicPublish
-        //                        (exchange: string.Empty,
-        //                         routingKey: channel.QueueDeclare(queue: string.Empty).QueueName,
-        //                        //routingKey: properties.ReplyTo,
-        //                        basicProperties: replyProperties,
-        //                        body: responseBytes);
-        //                    channel.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
-
-        //                    channel.QueueDeclare(queue: "ef", durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-        //                    var removeTagObject = RemoveTagObject(response);
-
-        //                }
-        //            };
-
-
-        //            System.Console.ReadKey();
-        //        }
-        //    }
-        //    System.Console.WriteLine("Consumer Stoped!");
-
-       
-        //}
-
 
         public bool RemoveTagObject(string bucketName)
         {
@@ -225,23 +99,19 @@ namespace Services.Services
                 var args = new RemoveObjectTagsArgs()
                                .WithBucket(minioDtoRemoveTag.BucketName)
                                .WithObject(minioDtoRemoveTag.ObjectName);
-                var ff = minio.RemoveObjectTagsAsync(args);
+                var removeObjectTags = minio.RemoveObjectTagsAsync(args);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                _logger.LogError(ex.Message);
             }
-            finally 
-            {
-
-            }
-        }
-
-        //public void Dispose()
-        //{
-        //    _channel.Dispose();
-        //    _channel.Dispose();
-        //}
+            return false;
+        }       
+    }
+    public class MinioDtoRemoveTag
+    {
+        public string BucketName { get; set; }
+        public string ObjectName { get; set; }
     }
 }

@@ -21,9 +21,11 @@ namespace Alborz.MinIo.Controllers
         private readonly MinioClient _MinioClient;
         public readonly string AccessKey = "EYDDQIQwwgSKCQVZqD8V";
         private readonly string SecretKey = "rfI3CkD49bFlfduzLlrujULg2eAFtfwUg2Kr5P1i";
-        //private readonly string EndpointDocker = "host.docker.internal:9000";
-        private readonly string EndpointDocker = Environment.GetEnvironmentVariable("ENDPOINTMINIO");
-        private readonly string Endpoint = "127.0.0.1:9000";
+        //private readonly string EndpointDocker = "host.docker.internal:9000";//docker
+
+        private readonly string Endpoint = Environment.GetEnvironmentVariable("ENDPOINTMINIO");//docker
+        
+        //private readonly string Endpoint = "127.0.0.1:9000";//localhost
 
         public MinioController(ILogger<MinioController> logger, MinioClient minioClient)
         {
@@ -45,8 +47,6 @@ namespace Alborz.MinIo.Controllers
                 Dictionary<string,string> keys = new Dictionary<string,string>();
                 keys.Add("AccessKey", AccessKey);
                 keys.Add("SecretKey", SecretKey);
-
-                //string keys = ($"AccessKey = {AccessKey}, SecretKey = {SecretKey}") ;
                 return Ok(keys);
             }
             catch (Exception ex)
@@ -55,7 +55,7 @@ namespace Alborz.MinIo.Controllers
                 throw new Exception(ex.Message);
 
             }
-        }
+        }  
 
         [HttpGet("[action]")]
         public async Task<ActionResult> MakeBucket(string bucketName)
@@ -64,8 +64,7 @@ namespace Alborz.MinIo.Controllers
             {
                 #region Initialization Minio
                 var location = "us-east-1";
-                //var endpoint = EndpointDocker;
-                var endpoint = EndpointDocker;
+                var endpoint = Endpoint;
                 //var port = "9000";
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
@@ -114,7 +113,7 @@ namespace Alborz.MinIo.Controllers
             try
             {
                 #region Add tag                 
-                var endpoint = EndpointDocker;
+                var endpoint = Endpoint;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -150,7 +149,7 @@ namespace Alborz.MinIo.Controllers
         [HttpGet("[action]")]
         public async Task<ActionResult> RemoveTagObject(string bucketName, string objectName)
         {            
-            var endpoint = "127.0.0.1:9000";
+            var endpoint = Endpoint;
             var accessKey = AccessKey;
             var secretKey = SecretKey;
             var secure = false;
@@ -173,6 +172,7 @@ namespace Alborz.MinIo.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
         /// <summary>
         /// Place the object in the queue
         /// </summary>
@@ -198,7 +198,7 @@ namespace Alborz.MinIo.Controllers
                 var filePath = objectName;
                 //var filePath = "C:/111.png";
                 var contentType = "application/octet-stream";
-                var endpoint = EndpointDocker;
+                var endpoint = Endpoint;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -237,7 +237,7 @@ namespace Alborz.MinIo.Controllers
         {
             try
             {
-                var endpoint = "127.0.0.1:9000";
+                var endpoint = Endpoint;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -272,7 +272,7 @@ namespace Alborz.MinIo.Controllers
         {
             try
             {
-                var endpoint = "127.0.0.1:9000";
+                var endpoint = Endpoint;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -309,8 +309,7 @@ namespace Alborz.MinIo.Controllers
         {
             try
             {
-                //var endpoint = "127.0.0.1:9000";
-                var endpoint = "localhost";
+                var endpoint = Endpoint;
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
                 var secure = false;
@@ -346,7 +345,7 @@ namespace Alborz.MinIo.Controllers
             try
             {
                 //var endpoint = "127.0.0.1:9000";
-                var endpoint = EndpointDocker;
+                var endpoint = Endpoint;
                 
                 var accessKey = AccessKey;
                 var secretKey = SecretKey;
@@ -368,6 +367,6 @@ namespace Alborz.MinIo.Controllers
             }
         }
 
-        
     }
+
 }

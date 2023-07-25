@@ -33,10 +33,10 @@ namespace Services.Services
 
             var factory = new ConnectionFactory()
             {
-                HostName = hostNameRabbitmq,
-                // HostName = "host.docker.internal",
-                //Port = 5672,
-                Port =int.Parse(portNameRabbitmq),
+                HostName = hostNameRabbitmq, //docker
+                Port = int.Parse(portNameRabbitmq),//docker
+                //HostName = "127.0.0.1",//localhost
+                //Port = 5672,//localhost
                 UserName = "guest",
                 Password = "guest"
             };
